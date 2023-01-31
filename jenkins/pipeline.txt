@@ -12,13 +12,13 @@ pipeline {
 		}
 		stage('Pull Jmeter Image from registery') {
 			steps {
-			    sh 'docker pull karthiksurabathula/jmeter'
+			    sh 'docker pull glawstraining/gl_accelarator:jmeter'
 			}
 		}
         stage('Get latest Build from repository') {
             steps {
                 echo 'Pulling latest script from GIT'
-                git 'https://github.com/karthiksurabathula/jmeter.git'
+                git 'https://github.com/ShanM98/jmeter.git'
             }
         }
         stage('Build Kubernetese Config') {
