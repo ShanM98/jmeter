@@ -51,6 +51,6 @@ spec:
   ports:
     - name: master
       port: 1099
-  type: ClusterIP
+  type: NodePort
 
 ---
