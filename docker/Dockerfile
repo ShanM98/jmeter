@@ -2,7 +2,7 @@
 FROM alpine
 RUN apk add --no-cache --upgrade bash
 
-ARG JMETER_VERSION="5.3"
+ARG JMETER_VERSION="5.5"
 
 ENV JMETER_HOME /opt/apache-jmeter-${JMETER_VERSION}
 ENV JMETER_BIN  ${JMETER_HOME}/bin
@@ -27,8 +27,8 @@ RUN    apk update \
 	&& mkdir -p /opt  \
 	&& tar -xzf /tmp/dependencies/apache-jmeter-${JMETER_VERSION}.tgz -C /opt  \
 	&& rm -rf /tmp/dependencies \
-	&& curl -L ${JMETER_PLUGINS_DOWNLOAD_URL}/cmdrunner/2.2/cmdrunner-2.2.jar -o ${JMETER_HOME}/lib/cmdrunner-2.2.jar \
-	&& curl -L ${JMETER_PLUGINS_DOWNLOAD_URL}/jmeter-plugins-manager/1.4/jmeter-plugins-manager-1.4.jar -o ${JMETER_PLUGINS_FOLDER}/jmeter-plugins-manager-1.4.jar
+	&& curl -L ${JMETER_PLUGINS_DOWNLOAD_URL}/cmdrunner/2.3/cmdrunner-2.3.jar -o ${JMETER_HOME}/lib/cmdrunner-2.3.jar \
+	&& curl -L ${JMETER_PLUGINS_DOWNLOAD_URL}/jmeter-plugins-manager/1.8/jmeter-plugins-manager-1.8.jar -o ${JMETER_PLUGINS_FOLDER}/jmeter-plugins-manager-1.8.jar
 
 ENV PATH $PATH:$JMETER_BIN
 
