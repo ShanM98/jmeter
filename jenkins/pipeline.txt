@@ -23,8 +23,8 @@ pipeline {
         }
         stage('Build Kubernetese Config') {
             steps {
-                sh 'mkdir -p `pwd`/kubernetes-init/data/;cp `pwd`/data/script.jmx `pwd`/kubernetes-init/data/script.jmx;'
-                sh 'cd `pwd`/kubernetes-init/;chmod 775 create.sh;./create.sh 2 script.jmx'
+                sh 'mkdir -p `pwd`/kubernetes-init/data/;cp `pwd`/data/cloudssky.jmx `pwd`/kubernetes-init/data/cloudssky.jmx;'
+                sh 'cd `pwd`/kubernetes-init/;chmod 775 create.sh;./create.sh 2 cloudssky.jmx'
                 sh 'mkdir -p `pwd`/kubernetes-init/data/logs/;mkdir -p `pwd`/kubernetes-init/data/results/;'
                 echo 'kubernetes configuration for Jmeter Masters and Slaves created successfully'
                 //echo "current build number: ${currentBuild.number}"
@@ -40,15 +40,15 @@ pipeline {
 		stage('Deploying JMeter Master and Start Test') {
             steps {
 				echo 'Starting Execution'
-                sh 'cd `pwd`/kubernetes-init/config/; microk8s kubectl apply -f master.yaml'
+                sh 'cd `pwd`/kubernetes-init/config/; kubectl apply -f master.yaml'
                 sh 'sleep 60;'
-				sh 'microk8s kubectl logs master -f'
+				sh 'kubectl logs master -f'
                 
             }
         }
         stage('Stopping Jmeter Pods') {
             steps {
-                sh 'cd `pwd`/kubernetes-init/config/; ls; microk8s kubectl delete -f .;'
+                sh 'cd `pwd`/kubernetes-init/config/; ls; kubectl delete -f .;'
                 echo 'Creating Pods for master & slave and Start execution'
             }
         }
